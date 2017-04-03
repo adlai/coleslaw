@@ -1,0 +1,33 @@
+{namespace coleslaw.theme.snide}
+
+{template index}
+{if $tags}
+<div id="tagsoup">
+  <p>This blog covers
+    {foreach $tag in $tags}
+      <a href="{$config.domain}/{$tag.url}">{$tag.name}</a>{nil}
+      {if not isLast($tag)},{sp}{/if}
+    {/foreach}
+</div>
+{/if}
+{if $months}
+<div id="monthsoup">
+  <p>Travel back to
+    {foreach $month in $months}
+      <a href="{$config.domain}/{$month.url}">{$month.name}</a>{nil}
+      {if not isLast($month)},{sp}{/if}
+    {/foreach}
+</div>
+{/if}
+{foreach $obj in $index.content}
+  <div class="article-meta">
+    <a class="article-title" href="{$config.domain}/{$obj.url}">{$obj.title}</a>
+    <div class="date"> leashed un {$obj.date}</div>
+    <div class="article">{$obj.text |noAutoescape}</div>
+  </div>
+{/foreach}
+<div id="relative-nav">
+  {if $prev} <a href="{$config.domain}/{$prev.url}">Prev</a> {/if}
+  {if $next} <a href="{$config.domain}/{$next.url}">Next</a> {/if}
+</div>
+{/template}

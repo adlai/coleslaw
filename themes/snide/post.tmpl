@@ -1,0 +1,23 @@
+{namespace coleslaw.theme.snide}
+
+{template post}
+<div class="article-meta">{\n}
+  <h1 class="title">{$post.title}</h1>{\n}
+  <div class="tags">{\n}
+    {if $post.tags}
+      Tagged as {foreach $tag in $post.tags}
+        <a href="{$config.domain}/{$tag.url}">{$tag.name}</a>{nil}
+          {if not isLast($tag)},{sp}{/if}
+      {/foreach}
+    {/if}
+  </div>{\n}
+  <div class="relative-nav">
+    {if $prev} <a href="{$config.domain}/{$prev.url}">Prev</a> {/if}
+    <span class="date"> {if $post.date} leashed un {$post.date} {/if} </span>
+    {if $next} <a href="{$config.domain}/{$next.url}">Next</a> {/if}
+  </div>
+</div>{\n}
+<div class="article-content">{\n}
+  {$post.text |noAutoescape}
+</div>{\n}
+{/template}
